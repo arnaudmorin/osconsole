@@ -7,7 +7,7 @@ import (
     "os"
 
     "golang.org/x/crypto/ssh/terminal"
-    "golang.org/x/net/websocket"
+    "github.com/gorilla/websocket"
 )
 
 type Connect struct {
@@ -24,16 +24,8 @@ func (c *Connect) Run() error {
         return err
     }
 
-    config, err := websocket.NewConfig(u.String(), u.Scheme+"://"+u.Host)
-    if err != nil {
-        return err
-    }
-    config.Protocol = []string{"binary", "base64"}
-    config.Version = 13
-    con, err := websocket.DialConfig(config)
-    if err != nil {
-        return err
-    }
+    con, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
+
 
     done := make(chan error)
     state, _ := terminal.MakeRaw(0)
@@ -50,21 +42,13 @@ _________________________________________
 
     // Read from nova console and send to client.
     go func() {
-        len := 32 * 1024
-        buf := bytes.NewBuffer(make([]byte, len))
         for {
-            buf.Truncate(len)
-            b := buf.Bytes()
-
-            n, err := con.Read(b)
+            _, message, err := con.ReadMessage()
             if err != nil {
-                done <- err
+                fmt.Println("Error: ", err)
                 return
-
-            } else if n == 0 {
-                continue
             }
-            term.Write(b[0:n])
+            term.Write(message)
         }
     }()
 
@@ -72,7 +56,6 @@ _________________________________________
     go func() {
         len := 4
         buf := bytes.NewBuffer(make([]byte, len))
-        fw, _ := con.NewFrameWriter(con.PayloadType)
 
         var prevKey byte
         for {
@@ -97,13 +80,11 @@ _________________________________________
                 prevKey = b[0]
             }
 
-            nw, err := fw.Write(b[0:nr])
+            err = con.WriteMessage(websocket.BinaryMessage, b[0:nr])
             if err != nil {
                 done <- err
                 return
 
-            } else if nr != nw {
-                done <- fmt.Errorf("Short written")
             }
         }
     }()

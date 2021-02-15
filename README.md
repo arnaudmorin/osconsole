@@ -1,12 +1,4 @@
 
-# Deprecated
-Better to use:
-https://github.com/vi/websocat/
-
-```
-./websocat_amd64-linux-static --binary 'ws://51.161.83.82:6083?token=8189441e-e10d-40f0-b48e-c9a2af7595dd'
-```
-
 # OpenStack Serial Console
 
 ## Introduction

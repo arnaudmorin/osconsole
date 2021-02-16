@@ -25,7 +25,9 @@ func (c *Connect) Run() error {
     }
 
     con, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
-
+    if err != nil {
+        return err
+    }
 
     done := make(chan error)
     state, _ := terminal.MakeRaw(0)

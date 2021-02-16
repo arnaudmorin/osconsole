@@ -35,10 +35,13 @@ nova get-serial-console
 The, just copy/paste this URL to osconsole:
 
 ```
-osconsole ws://51.89.5.214:6083/?token=2e1ba41d-61f2-4b3e-a26d-777fdb56665d
-Connected. Type "Ctrl+[ d" to disconnect.
-_________________________________________
+osconsole 'ws://51.89.5.214:6083/?token=2e1ba41d-61f2-4b3e-a26d-777fdb56665d'
++-----------------------------------------+ 
+|Connected. Type "Ctrl+[ d" to disconnect.| 
++-----------------------------------------+ 
 
+login as 'cirros' user. default password: 'gocubsgo'. use 'sudo' for root.
+n1 login:
 ```
 
 You are now connected!
@@ -48,5 +51,6 @@ This project has been inspired from:
 https://github.com/hironobu-s/novassh
 
 Original author: Hironobu Saitoh - [hiro@hironobu.org](mailto:hiro@hironobu.org)
+
 osconsole author: Arnaud Morin - [arnaud.morin@gmail.com](mailto:arnaud.morin@gmail.com)
 

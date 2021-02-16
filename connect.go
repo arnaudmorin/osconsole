@@ -36,8 +36,9 @@ func (c *Connect) Run() error {
 
     // Print initial message
     msg := `
-Connected. Type "Ctrl+[ d" to disconnect.
-_________________________________________
++-----------------------------------------+
+|Connected. Type "Ctrl+[ d" to disconnect.|
++-----------------------------------------+
 
 `
     term.Write([]byte(msg))
@@ -76,7 +77,6 @@ _________________________________________
             // Ctrl+[ d
             if prevKey == 0x1b && b[0] == 'd' {
                 done <- nil
-                term.Write([]byte(`Disconnecting...`))
                 return
             } else {
                 prevKey = b[0]

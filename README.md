@@ -7,6 +7,8 @@ This can be useful when your instance is not accessible from network.
 
 This is pretty much the same as using the Web Console, but using a cli tool is always easier for sysadmins.
 
+![example](record.gif)
+
 ## Configuration on OpenStack side
 Before using this tool, you must configure your OpenStack to display Serial Console.
 This can be done by following this link:

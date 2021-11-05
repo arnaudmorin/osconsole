@@ -16,7 +16,10 @@ https://docs.openstack.org/nova/latest/admin/remote-console-access.html#serial
 
 ## Install
 ### Download pre-compiled binary
-See here:
+See here: https://github.com/arnaudmorin/osconsole/releases/latest
+```
+wget https://github.com/arnaudmorin/osconsole/releases/download/0.0.3/osconsole
+```
 
 ### Build from sources
 You can build from sources:
@@ -29,10 +32,10 @@ bash build.sh
 Before using **osconsole**, you must request a **Serial over WebSocket** URL for your instance against your OpenStack:
 
 ```
-nova get-serial-console
+openstack console url show --serial myserver
+# or
+# nova get-serial-console
 ```
-
-(note that, as of 2021, this is still not possible to do it using openstack client, you still need to use nova for this)
 
 The, just copy/paste this URL to osconsole:
 

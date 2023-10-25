@@ -17,15 +17,16 @@ type Connect struct {
 // Connect to an instance via nova console
 // http://docs.openstack.org/developer/nova/testing/serial-console.html
 //
-// Type "Ctrl+[ q" to disconnect
+// Type "Ctrl+[ d" to disconnect
 func (c *Connect) Run() error {
     u, err := url.Parse(c.config.ConsoleUrl)
     if err != nil {
         return err
     }
 
-    con, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
+    con, resp, err := websocket.DefaultDialer.Dial(u.String(), nil)
     if err != nil {
+        fmt.Println(resp)
         return err
     }
 

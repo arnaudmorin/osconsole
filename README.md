@@ -18,8 +18,13 @@ https://docs.openstack.org/nova/latest/admin/remote-console-access.html#serial
 ### Download pre-compiled binary
 See here: https://github.com/arnaudmorin/osconsole/releases/latest
 ```
-wget https://github.com/arnaudmorin/osconsole/releases/download/0.0.3/osconsole
+wget https://github.com/arnaudmorin/osconsole/releases/latest/download/osconsole
+chmod +x osconsole
 ```
+
+Binaries are also available for other platforms: `osconsole-linux-arm64`,
+`osconsole-darwin-amd64` and `osconsole-darwin-arm64`. A new release is
+published automatically for each commit on the `main` branch.
 
 ### Build from sources
 You can build from sources:

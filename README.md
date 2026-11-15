@@ -51,6 +51,34 @@ n1 login:
 
 You are now connected!
 
+## Using the VNC console (experimental)
+When the serial console is not enabled on your cloud, **osconsole** can also
+use the noVNC console. The VNC protocol only carries pixels, so osconsole
+recognizes the characters drawn on the screen by matching them against font
+bitmaps: the QEMU VGA BIOS font (embedded, see [fonts](fonts/README.md)) and
+the Linux console fonts installed on your machine (packages `console-setup`
+or `kbd`), in case the instance loads one of them. It works when the
+instance shows a text console (VGA text mode, or the kernel framebuffer
+console), not a graphical desktop.
+
+```
+osconsole "$(openstack console url show --novnc -f value -c url myserver)"
+```
+
+The remote screen is mirrored in your terminal (no scrollback), keystrokes
+are sent as VNC key events assuming a US keyboard layout on the instance.
+
+Grab the screen as text, for scripts:
+
+```
+osconsole -screenshot 'http://51.89.5.214:6080/vnc_lite.html?path=%3Ftoken%3D...'
+osconsole -screenshot -type 'root\r' -wait 3s 'http://...'
+```
+
+If characters show up as `�`, the instance uses a console font you do not
+have locally: pass it with `-font /path/to/font.psf.gz` (can be repeated,
+globs accepted).
+
 ## Authors
 This project has been inspired from:
 https://github.com/hironobu-s/novassh

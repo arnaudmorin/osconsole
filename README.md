@@ -61,6 +61,8 @@ or `kbd`), in case the instance loads one of them. It works when the
 instance shows a text console (VGA text mode, or the kernel framebuffer
 console), not a graphical desktop.
 
+![VNC example](record-vnc.gif)
+
 ```
 osconsole "$(openstack console url show --novnc -f value -c url myserver)"
 ```
